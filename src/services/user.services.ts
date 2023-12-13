@@ -7,7 +7,6 @@ import {
    TUserRegisterBody,
    TUserReturn,
    userReturnSchema,
-   userSchema,
 } from "../schemas/user.schemas";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -37,13 +36,13 @@ export class UserServices {
       const user = await prisma.user.findFirst({ where: { email: body.email } });
 
       if (!user) {
-         throw new AppError("User not registered");
+         throw new AppError("User not registered", 404);
       }
 
       const comparePassword = await bcrypt.compare(body.password, user.password);
 
       if (!comparePassword) {
-         throw new AppError("E-mail and password doesn't match");
+         throw new AppError("E-mail and password doesn't match", 403);
       }
 
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
@@ -57,6 +56,6 @@ export class UserServices {
    async getUser(userId: string): Promise<TUserReturn>{
     const user = await prisma.user.findFirst({ where: { id: userId }});
 
-    return userSchema.parse(user);
+    return userReturnSchema.parse(user);
    }
 }

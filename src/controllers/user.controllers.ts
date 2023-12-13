@@ -10,7 +10,7 @@ export class UserControllers {
    async register(req: Request, res: Response): Promise<Response<TUserReturn>> {
       const response = await this.userService.register(req.body);
 
-      return res.status(200).json(response);
+      return res.status(201).json(response);
    }
 
    async login(req: Request, res: Response): Promise<Response<TUserLoginReturn>> {

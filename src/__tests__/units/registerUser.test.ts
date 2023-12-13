@@ -28,5 +28,5 @@ describe("Unit test: register user", () => {
       const register = async () => await userServices.register(userRegisterBodyMock);
       
       expect(register()).rejects.toThrow("This email is already registered");
-   });
+   });   
 });

@@ -4,7 +4,7 @@ export const userSchema = z.object({
     id: z.string().min(1),
     name: z.string().min(1),
     email: z.string().min(1),
-    password: z.string().min(8)
+    password: z.string().min(1)
 });
 
 export type TUser = z.infer<typeof userSchema>;
