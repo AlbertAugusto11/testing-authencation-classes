@@ -54,9 +54,9 @@ export class UserServices {
       };
    }
 
-   async getUser(userId: string): Promise<TUserReturn>{
-    const user = await prisma.user.findFirst({ where: { id: userId }});
+   async getUser(userId: string): Promise<TUserReturn> {
+      const user = await prisma.user.findFirst({ where: { id: userId } });
 
-    return userSchema.parse(user);
+      return userSchema.parse(user);
    }
 }
